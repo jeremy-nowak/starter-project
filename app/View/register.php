@@ -43,22 +43,22 @@ require_once "header.php";
                     <input type="submit" value="Register" id="submit_register">
                 </div>
 
-                <div class="error_msg">
-                    <p id="error_login"></p>
-                </div>
-                <div class="success_msg">
-                    <p id="success_submit"></p>
-                </div>
-                <div class="error_msg">
-                    <p id="error_submit"></p>
-                </div>
-                <div class="error_msg">
-                    <p id="error_password_conf"></p>
-                </div>
-                <div class="error_msg">
-                    <p id="error_password"></p>
-                </div>
             </form>
+            <div class="error_msg">
+                <p id="error_login"></p>
+            </div>
+            <div class="success_msg">
+                <p id="success_submit"></p>
+            </div>
+            <div class="error_msg">
+                <p id="error_submit"></p>
+            </div>
+            <div class="error_msg">
+                <p id="error_password_conf"></p>
+            </div>
+            <div class="error_msg">
+                <p id="error_password"></p>
+            </div>
         </div>
     </div>
 </body>

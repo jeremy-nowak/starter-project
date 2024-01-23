@@ -24,6 +24,9 @@
         if (loginValue.trim() === "") {
           login.style.backgroundColor = "red";
           login.style.borderColor = "red";
+          error_login.innerHTML = "You need to type a login";
+
+
         } else {
           login.style.backgroundColor = "#FFFFFF";
           login.style.borderColor = "#FFFFFF";

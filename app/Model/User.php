@@ -114,14 +114,17 @@ class User extends Database
                 $_SESSION["user"]["id_user"] = $user["id_user"];
                 $_SESSION["user"]["login"] = $user["login"];
                 echo "loginOK";
-                return "loginOK";
+                // return "loginOK";
+                return true;
             } else {
                 echo "loginFailpass";
-                return "loginFaipassl";
+                // return "loginFaipassl";
+                return false;
             }
         } else {
             echo "loginFail";
-            return "loginFail";
+            // return "loginFail";
+            return false;
         }
     }
 }
