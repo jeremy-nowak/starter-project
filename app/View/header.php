@@ -3,9 +3,11 @@
         <div class="headerz" >
             <ul class="ul_button">
                 <?php if (!isset($_SESSION['user'])) { ?>
-                    <a href="/starter-project/register"><button type="button" class="register_btn">Register</button></a>
-                    <a href="/starter-project/login"><button type="button" class="login_btn">Login</button></a>
                     <a href="/starter-project/"><button type="button" class="home_btn">Home page</button></a>
+                    <a href="/starter-project/login"><button type="button" class="login_btn">Login</button></a>
+                    <a href="/starter-project/register"><button type="button" class="register_btn">Register</button></a>
+                    <a href="/starter-project/dbCreation"> <button type="button" class="dbCreation_btn">Create your data base</button></a>
+
 
                 <?php } else { ?>
 

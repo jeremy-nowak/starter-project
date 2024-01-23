@@ -64,7 +64,14 @@ $router->map( 'POST', '/register/verifLog', function(){
 // ------------------------------------------------------------------------------------------------------
 
 
-
+$router->map( 'POST', '/starter-project/dbCreation', function(){
+    $authController = new DataBaseCreate();
+    $newServername = $_POST["newServername"];
+    $newUsername = $_POST["newUsername"];
+    $newPassword = $_POST["newPassword"];
+    $db = $_POST["db"];
+    $authController->createNewDb($newServername, $newUsername, $newPassword, $db);
+}, "dbCreation");
 
 
 
