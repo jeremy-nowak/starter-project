@@ -6,6 +6,7 @@ $router->setBasePath('/starter-project');
 use App\Model\Model;
 use App\View\View;
 use App\Controller\AuthController;
+use App\Controller\DbCreationController;
 use App\Controller\TodoController;
 use App\Model\User;
 
@@ -65,12 +66,12 @@ $router->map( 'POST', '/register/verifLog', function(){
 
 
 $router->map( 'POST', '/starter-project/dbCreation', function(){
-    $authController = new DataBaseCreate();
+    $authController = new DbCreationController();
     $newServername = $_POST["newServername"];
     $newUsername = $_POST["newUsername"];
     $newPassword = $_POST["newPassword"];
     $db = $_POST["db"];
-    $authController->createNewDb($newServername, $newUsername, $newPassword, $db);
+    $authController->controllerCreateNewDb($newServername, $newUsername, $newPassword, $db);
 }, "dbCreation");
 
 
