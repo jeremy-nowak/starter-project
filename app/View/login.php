@@ -12,7 +12,7 @@ require_once "header.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="public/scripts/scriptLogin.js"></script>
+    <script defer src="public/scripts/scriptLogin.js"></script>
     <link rel="stylesheet" href="public/style/style.css">
     <title>Login</title>
 </head>
