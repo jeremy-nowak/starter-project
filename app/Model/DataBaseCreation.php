@@ -1,10 +1,10 @@
-
-
-
 <?php
 
+namespace App\Model;
+use PDO;
+use PDOException;
 
-class DataBaseCreate{
+class DataBaseCreation{
 
 
 
