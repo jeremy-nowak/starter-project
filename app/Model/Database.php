@@ -31,7 +31,7 @@ abstract class Database{
         }
     }
 
-    public function createNewBdd($newServername, $newUsername, $newPassword, $db){
+    public function createNewDb($newServername, $newUsername, $newPassword, $db){
         $this->newServername = $newServername;
         $this->newUsername = $newUsername;
         $this->newPassword = $newPassword;
