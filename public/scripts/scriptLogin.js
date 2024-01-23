@@ -11,10 +11,10 @@
     // --------------------------------Verification of form inputS start-----------------------------
     // ----------------------------------------------------------------------------------------------
 
-    async function login_check(login_login) {
+    async function log_check(login_login) {
       let login_loginValue = login_login.value;
-      error_login.innerHTML = "";
-
+      console.log(login_loginValue);
+      error_form_login.innerHTML = "";
 
       if (login_loginValue.trim() === "") {
         login_login.style.backgroundColor = "red";
@@ -24,21 +24,6 @@
         login_login.style.borderColor = "#FFFFFF";
       }
 
-      let data = new FormData(form_register);
-      data.append("loginCheck", "ok");
-
-      let result = (await response.text()).trim();
-      console.log(result);
-
-      if (result === "existing") {
-        error_login.innerHTML = "Login unavailable";
-        login_login.style.borderColor = "red";
-        login_login.style.backgroundColor = "red";
-      } else if (result === "notexisting") {
-        login_login.style.borderColor = "#FFFFFF";
-        login_login.style.backgroundColor = "#FFFFFF";
-        error_login.innerHTML = "";
-      }
     }
     // ----------------------------------------------------------------------------------------------
     // --------------------------------Verification of form inputS end-------------------------------
@@ -86,6 +71,11 @@
       e.preventDefault();
     
       login(login_form)
+    });
+
+    login_login.addEventListener("blur", async function (e) {
+      e.preventDefault();
+      await log_check(login_login);
     });
 
     // ----------------------------------------------------------------------------------------------

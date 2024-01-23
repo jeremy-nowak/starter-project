@@ -76,7 +76,7 @@
   
         if (password_confValue.trim() === "") {
           password_conf.style.backgroundColor = "red";
-          error_password_conf.innerHTML = "You need to type a password";
+          error_password_conf.innerHTML = "You need to type a confirmation password";
         } else {
           password_conf.style.backgroundColor = "#FFFFFF";
           password_conf.style.borderColor = "#FFFFFF";
