@@ -3,17 +3,16 @@ namespace App\Model;
 use PDO;
 use PDOException;
 
-abstract class Database{
+abstract class Database {
     protected $bdd;
     public $host;
     public $dbname;
     public $dbUser;
     public $dbPass;
 
-    public function __construct(){
-        
+    public function __construct() {
         $this->host = 'localhost';
-        $this->dbname = 'nom de la base de donnée';
+        $this->dbname = '';
         $this->dbUser = 'root';
         $this->dbPass = '';
 
@@ -27,7 +26,24 @@ abstract class Database{
         }
     }
 
+    // Méthode non statique
+    public function createNewDb($db) {
+        try {
+            $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+            // Creating a database named with $db variable
+            $sql = "CREATE DATABASE IF NOT EXISTS $db";
+            $this->bdd->exec($sql);
+            
+            echo "Database created successfully with the name $db";
 
-    
+            return true;
+
+        } catch (PDOException $e) {
+            echo "Error creating database: " . $e->getMessage();
+
+            return false;
+        }
     }
+}
 ?>
