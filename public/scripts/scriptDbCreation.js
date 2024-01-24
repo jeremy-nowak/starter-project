@@ -35,16 +35,17 @@ async function dbCreate(dbCreateForm) {
         body: data
     });
 
-    let result = await response.text().trim();
+    let result = await response.json();
+    console.log(result);
 
-    if (result == true) {
+    if (result.succes == true) {
 
         dbSuccess.innerHTML = "Database created !"
         setTimeout(() => {
             window.location = "/starter-project/";
         }, 3000);
     }
-    if (result == false) {
+    if (result.succes == false) {
         dbError.innerHTML = "Database creation fail";
     }
 }
@@ -66,14 +67,14 @@ async function dbCreate(dbCreateForm) {
 // --------------------------------------AddEventListener start----------------------------------
 // ----------------------------------------------------------------------------------------------
 
-dbCreateForm.addEventListener("submit", function (e) {
+dbCreateForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     let form = new FormData(dbCreateForm);
     console.log(form)
 
-    dbCreate(dbCreateForm);
+   await dbCreate(dbCreateForm);
 
-    });
+});
 
 
 

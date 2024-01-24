@@ -21,9 +21,9 @@ abstract class AbstractDatabase implements DatabaseInterface{
             $this->bdd = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=utf8", $this->dbUser, $this->dbPass);
             $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->bdd->exec("set names utf8");
-            if ($this->bdd) {
-                echo "Connected to the <strong>$this->dbname</strong> database successfully!";
-            }
+
+                echo "Construct connexion to the <strong>$this->dbname</strong> database successfully!";
+            
         } catch (PDOException $e) {
             echo "Error : " . $e->getMessage();
             die();
@@ -33,18 +33,14 @@ abstract class AbstractDatabase implements DatabaseInterface{
     public function createNewDbAbstract($db) {
         try {
             $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
             $sql = "CREATE DATABASE IF NOT EXISTS $db";
             $this->bdd->exec($sql);
             
-            echo "Database created successfully with the name $db";
-
-            return true;
+            return json_encode(['success' => true, 'message' => "Database created successfully with the name: $db"]);
 
         } catch (PDOException $e) {
-            echo "Error creating database: " . $e->getMessage();
 
-            return false;
+            return json_encode(['success' => false, 'message' => "Error creating database: " . $e->getMessage()]);
         }
     }
 
@@ -62,14 +58,10 @@ abstract class AbstractDatabase implements DatabaseInterface{
                 )";
             $this->bdd->exec($sql);
             
-            echo "Table $table created successfully in $db database";
-
-            return true;
+            return json_encode(['success' => true, 'message' => "The table named '$table' have been created"]);
 
         } catch (PDOException $e) {
-            echo "Error creating table: " . $e->getMessage();
-
-            return false;
+            return json_encode(['success' => false, 'message' => "Error creating table; '$table' "]);
         }
     }
 

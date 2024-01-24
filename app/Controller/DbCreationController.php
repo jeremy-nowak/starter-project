@@ -15,7 +15,16 @@ class DbCreationController{
         $dbName = str_replace(' ', '_', $db);
 
         $dbCreation = new DataBaseCreation($connServername, $connUsername, $connPassword);
-        $dbCreation->createNewDb($dbName);
+
+        if($dbCreation->createNewDb($dbName) == true){
+            echo "Database controller successfull";
+            return true;
+        }
+        else{
+            echo "Database controller failed";
+            return false;
+        }
+
     }
 
 
