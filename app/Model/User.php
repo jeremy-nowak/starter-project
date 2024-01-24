@@ -12,7 +12,7 @@ class User extends Database
     private $login;
     private $id;
 
-    public function __construct($login = null)
+    public function __construct()
     {
         parent::__construct();
     }
