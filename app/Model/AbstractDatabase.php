@@ -1,6 +1,6 @@
 <?php
 namespace App\Model;
-use App\Interfaces\DatabaseInterface;
+use App\Interface\DatabaseInterface;
 use PDO;
 use PDOException;
 
