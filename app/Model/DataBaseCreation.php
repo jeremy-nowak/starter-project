@@ -19,10 +19,6 @@ class DataBaseCreation extends AbstractDatabase {
 
     }
 
-
-    public function createNewDbAbstract($db){
-
-    }
     public function createNewTableAbstract($db, $table){
 
     }
