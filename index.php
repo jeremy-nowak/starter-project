@@ -65,16 +65,30 @@ $router->map( 'POST', '/register/verifLog', function(){
 // ------------------------------------------------------------------------------------------------------
 
 
-$router->map( 'POST', '/starter-project/dbCreation', function(){
+// ------------------------------------------------------------------------------------------------------
+// ------------------------------------ DataBase Creation start -----------------------------------------
+// ------------------------------------------------------------------------------------------------------
+
+$router->map( 'GET', '/dbCreation', function(){
+    require_once "app/View/dbCreation.php";
+}, "dbCreationForm");
+
+$router->map( 'POST', '/dbCreation/start', function(){
+
     $authController = new DbCreationController();
-    $newServername = $_POST["newServername"];
-    $newUsername = $_POST["newUsername"];
-    $newPassword = $_POST["newPassword"];
+    
+    $connServername = $_POST["host"];
+    $connUsername = $_POST["dbUser"];
+    $connPassword = $_POST["dbPass"];
     $db = $_POST["db"];
-    $authController->controllerCreateNewDb($newServername, $newUsername, $newPassword, $db);
+    
+    $authController->controllerCreateNewDb($connServername, $connUsername, $connPassword, $db);
 }, "dbCreation");
 
 
+// ------------------------------------------------------------------------------------------------------
+// ----------------------------------- DataBase Creation end --------------------------------------------
+// ------------------------------------------------------------------------------------------------------
 
 
 

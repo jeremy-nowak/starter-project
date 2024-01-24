@@ -6,19 +6,22 @@ use PDOException;
 
 class DataBaseCreation{
 
+    private string $connServername;
+    private string $connUsername;
+    private string $connPassword;
 
-
-    private $newServername;
-    private $newUsername;
-    private $newPassword;
+    public function __construct($connServername, $connUsername, $connPassword){
+        
+        $this->connServername = $connServername;
+        $this->connUsername = $connUsername;
+        $this->connPassword = $connPassword;
+    } 
     
-    public function createNewDb($newServername, $newUsername, $newPassword, $db){
-        $this->newServername = $newServername;
-        $this->newUsername = $newUsername;
-        $this->newPassword = $newPassword;
+    public function createNewDb($db){
+
     
         try {
-            $conn = new PDO("mysql:host=$this->newServername", $this->newUsername, $this->newPassword);
+            $conn = new PDO("mysql:host=$this->connServername", $this->connUsername, $this->connPassword);
         
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
@@ -27,8 +30,13 @@ class DataBaseCreation{
             $conn->exec($sql);
             
             echo "Database created successfully with the name $db";
+
+            return $conn;
+
         } catch (PDOException $e) {
             echo "Error creating database: " . $e->getMessage();
+            return $conn;
+            
         }
         
         $conn = null;

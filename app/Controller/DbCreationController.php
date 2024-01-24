@@ -6,13 +6,15 @@ use App\Model\DataBaseCreation;
 class DbCreationController{
 
 
+    public function controllerCreateNewDb(string $connServername, string $connUsername,string $connPassword, string $db){
 
-    public function controllerCreateNewDb($newServername, $newUsername, $newPassword, $db){
+        $connServername = trim(htmlspecialchars($connServername));
+        $connUsername = trim(htmlspecialchars($connUsername));
+        $connPassword = trim(htmlspecialchars($connPassword));
+        $db = trim(htmlspecialchars($db));
 
-        $dbCreation = new DataBaseCreation();
-        $dbCreation->createNewDb($newServername, $newUsername, $newPassword, $db);
-
-
+        $dbCreation = new DataBaseCreation($connServername, $connUsername, $connPassword);
+        $dbCreation->createNewDb($db);
     }
 
 
