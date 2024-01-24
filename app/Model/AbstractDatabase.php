@@ -1,10 +1,10 @@
 <?php
 namespace App\Model;
-use App\Interfaces\AbstractDatabaseInterface;
+use App\Interfaces\DatabaseInterface;
 use PDO;
 use PDOException;
 
-abstract class AbstractDatabase implements AbstractDatabaseInterface{
+abstract class AbstractDatabase implements DatabaseInterface{
     protected $bdd;
     public $host;
     public $dbname;
