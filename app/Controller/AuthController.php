@@ -10,19 +10,19 @@ if (!isset($_SESSION)) {
 
 class AuthController{
 
-    function ControllerCheckLoginAuth($login, $dbName){
+    function ControllerCheckLoginAuth($login){
 
-        $user = new User($dbName);
+        $user = new User();
         return $user->checkLogin($login);
     }
 
 
-    function ControllerRegister($dbName){
+    function ControllerRegister(){
         $regexPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
         $login = trim($_POST['login']);
         $password = trim($_POST['password']);
         $password_conf = trim($_POST['password_conf']);
-        if ($this->ControllerCheckLoginAuth($login, $dbName) === "notexisting") {
+        if ($this->ControllerCheckLoginAuth($login, ) === "notexisting") {
 
             if (
                 !empty($password) &&
@@ -42,7 +42,7 @@ class AuthController{
                     $password = password_hash($password, PASSWORD_DEFAULT);
 
 
-                    $user = new User($dbName);
+                    $user = new User();
                     $user->register($login, $password);
                 }
             }
@@ -52,20 +52,20 @@ class AuthController{
     }
 
 
-    public function checkIdUser($dbName){
+    public function checkIdUser(){
 
         $userId = trim($_SESSION['user']["id_user"]);
         $userId = htmlspecialchars($userId);
-        $user = new User($dbName);
+        $user = new User();
         return $user->checkIdUser($userId);
     }
 
-    public function authLogin($dbName){
+    public function authLogin(){
 
         $login = trim($_POST['login']);
         $password = trim($_POST['password_login']);
 
-        $user = new User($dbName);
+        $user = new User();
         $user->login($login, $password);
     }
 
@@ -76,7 +76,7 @@ class AuthController{
     }
 
 
-    public function updateProfile($dbName){
+    public function updateProfile(){
 
         $regexPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
         $login = trim($_POST['login']);
@@ -102,7 +102,7 @@ class AuthController{
                     $password = password_hash($password, PASSWORD_DEFAULT);
                     $id = htmlspecialchars($id);
 
-                    $user = new User($dbName);
+                    $user = new User();
                     $user->update($login, $password, $id);
                 } else {
                     echo "Problem between input password and password confirmation";
