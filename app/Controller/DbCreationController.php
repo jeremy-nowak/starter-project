@@ -12,10 +12,12 @@ class DbCreationController{
         $connUsername = trim(htmlspecialchars($connUsername));
         $connPassword = trim(htmlspecialchars($connPassword));
         $db = trim(htmlspecialchars($db));
+        $dbName = str_replace(' ', '_', $db);
 
         $dbCreation = new DataBaseCreation($connServername, $connUsername, $connPassword);
-        $dbCreation->createNewDb($db);
+        $dbCreation->createNewDb($dbName);
     }
+
 
 
 }

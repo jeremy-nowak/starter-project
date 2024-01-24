@@ -75,11 +75,13 @@ $router->map( 'GET', '/dbCreation', function(){
 
 $router->map( 'POST', '/dbCreation/start', function(){
 
-    $authController = new DbCreationController();
     
     $connServername = $_POST["host"];
     $connUsername = $_POST["dbUser"];
     $connPassword = $_POST["dbPass"];
+
+    $authController = new DbCreationController($connServername, $connUsername, $connPassword);
+
     $db = $_POST["db"];
     
     $authController->controllerCreateNewDb($connServername, $connUsername, $connPassword, $db);
