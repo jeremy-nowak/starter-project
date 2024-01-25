@@ -15,7 +15,8 @@ class DataBaseCreation extends AbstractDatabase {
     
     public function createNewDb($db) {
 
-        return $this->createNewDbAbstract($db);
+        
+         $this->createNewDbAbstract($db);
 
     }
 

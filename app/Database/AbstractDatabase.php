@@ -22,10 +22,8 @@ abstract class AbstractDatabase implements DatabaseInterface{
             $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->bdd->exec("set names utf8");
 
-                echo "Construct connexion to the <strong>$this->dbname</strong> database successfully!";
-            
+
         } catch (PDOException $e) {
-            echo "Error : " . $e->getMessage();
             die();
         }
     }
@@ -36,11 +34,11 @@ abstract class AbstractDatabase implements DatabaseInterface{
             $sql = "CREATE DATABASE IF NOT EXISTS $db";
             $this->bdd->exec($sql);
             
-            return json_encode(['success' => true, 'message' => "Database created successfully with the name: $db"]);
+            echo json_encode(['success' => true, 'message' => "Database created successfully with the name: $db"]);
 
         } catch (PDOException $e) {
 
-            return json_encode(['success' => false, 'message' => "Error creating database: " . $e->getMessage()]);
+            echo json_encode(['success' => false, 'message' => "Error creating database: " . $e->getMessage()]);
         }
     }
 
@@ -58,10 +56,10 @@ abstract class AbstractDatabase implements DatabaseInterface{
                 )";
             $this->bdd->exec($sql);
             
-            return json_encode(['success' => true, 'message' => "The table named '$table' have been created"]);
+            echo json_encode(['success' => true, 'message' => "The table named '$table' have been created"]);
 
         } catch (PDOException $e) {
-            return json_encode(['success' => false, 'message' => "Error creating table; '$table' "]);
+            echo json_encode(['success' => false, 'message' => "Error creating table; '$table' "]);
         }
     }
 
@@ -72,14 +70,12 @@ abstract class AbstractDatabase implements DatabaseInterface{
             $sql = "DROP TABLE $db.$table";
             $this->bdd->exec($sql);
             
-            echo "Table $table dropped successfully in $db database";
+            echo json_encode(['success' => true, 'message' => "Table $table dropped successfully in $db database"]);
 
-            return true;
 
         } catch (PDOException $e) {
-            echo "Error dropping table: " . $e->getMessage();
 
-            return false;
+            echo json_encode(['success' => true, 'message' => "Error dropping table: " . $e->getMessage()]);
         }
     }
 

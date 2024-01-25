@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-use App\Model\AbstractDatabase;
+use App\Database\AbstractDatabase;
 
 class TableCreationController{
 
