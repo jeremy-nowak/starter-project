@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-use App\Model\DataBaseCreation;
+use App\Database\DataBaseCreation;
 
 
 class DbCreationController{
@@ -15,15 +15,13 @@ class DbCreationController{
         $dbName = str_replace(' ', '_', $db);
 
         $dbCreation = new DataBaseCreation($connServername, $connUsername, $connPassword);
-
-        if($dbCreation->createNewDb($dbName) == true){
-            echo "Database controller successfull";
-            return true;
-        }
-        else{
-            echo "Database controller failed";
-            return false;
-        }
+        $dbCreation->createNewDb($dbName);
+        // if ($dbCreation->createNewDb($dbName)) {
+        //     echo json_encode(['success' => true, 'message' => "Database controller successful"], JSON_PRETTY_PRINT);
+        // } else {
+        //     echo json_encode(['success' => false, 'message' => "Database controller failed"], JSON_PRETTY_PRINT);
+        // }
+        
 
     }
 

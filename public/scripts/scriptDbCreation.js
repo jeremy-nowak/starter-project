@@ -27,7 +27,8 @@ let dbSuccess = document.querySelector("#dbSuccess");
 // ----------------------------------------Function JS start-------------------------------------
 // ----------------------------------------------------------------------------------------------
 
-async function dbCreate(dbCreateForm) {
+ async function dbCreate(dbCreateForm) {
+
     let data = new FormData(dbCreateForm);
     data.append("dbCreateForm", "ok");
     let response = await fetch("/starter-project/dbCreation/start", {
@@ -36,17 +37,21 @@ async function dbCreate(dbCreateForm) {
     });
 
     let result = await response.json();
-    console.log(result);
+    console.log(result)
 
-    if (result.succes == true) {
+    if (result.success === true) {
+        dbSuccess.innerHTML = "Database created !";
 
-        dbSuccess.innerHTML = "Database created !"
         setTimeout(() => {
-            window.location = "/starter-project/";
+            dbSuccess.innerHTML = "";
         }, 3000);
     }
-    if (result.succes == false) {
+    else if (result.success == false) {
         dbError.innerHTML = "Database creation fail";
+
+        setTimeout(() => {
+            dbError.innerHTML = ""
+        }, 3000);
     }
 }
 
@@ -72,7 +77,7 @@ dbCreateForm.addEventListener("submit", async function (e) {
     let form = new FormData(dbCreateForm);
     console.log(form)
 
-   await dbCreate(dbCreateForm);
+    await dbCreate(dbCreateForm);
 
 });
 

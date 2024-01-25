@@ -2,11 +2,11 @@
 
 namespace App\Model;
 
+use App\Database\AbstractDatabase;
 use PDO;
-use App\Model\Database;
 
 
-class User extends Database
+class User extends AbstractDatabase
 {
 
     private $login;
@@ -126,5 +126,21 @@ class User extends Database
             // return "loginFail";
             return false;
         }
+    }
+    
+    public function createNewTableAbstract(string $db, string $table){
+
+    }
+    public function getAll(){
+
+    }
+    public function getOne(int $id){
+
+    }
+    public function updateTableAbstract(string $db, string $table){
+
+    }
+    public function dropTableAbstract(string $db, string $table){
+
     }
 }
