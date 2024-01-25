@@ -1,10 +1,11 @@
 <?php
 namespace App\Database;
 use App\Interface\DatabaseInterface;
+use App\Database\DatabaseConnection;
 use PDO;
 use PDOException;
 
-abstract class AbstractDatabase implements DatabaseInterface{
+abstract class AbstractDatabase extends DatabaseConnection implements DatabaseInterface {
     protected $bdd;
     public $host;
     public $dbname;
@@ -12,20 +13,19 @@ abstract class AbstractDatabase implements DatabaseInterface{
     public $dbPass;
 
     public function __construct() {
-        $this->host = 'localhost';
-        $this->dbname = '';
-        $this->dbUser = 'root';
-        $this->dbPass = '';
 
-        try {
-            $this->bdd = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=utf8", $this->dbUser, $this->dbPass);
-            $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->bdd->exec("set names utf8");
+        parent::__construct();
+        
+
+        // try {
+        //     $this->bdd = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=utf8", $this->dbUser, $this->dbPass);
+        //     $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //     $this->bdd->exec("set names utf8");
 
 
-        } catch (PDOException $e) {
-            die();
-        }
+        // } catch (PDOException $e) {
+        //     die();
+        // }
     }
 
     public function createNewDbAbstract($db) {
@@ -79,6 +79,7 @@ abstract class AbstractDatabase implements DatabaseInterface{
         }
     }
 
+    
 
 }
 ?>
