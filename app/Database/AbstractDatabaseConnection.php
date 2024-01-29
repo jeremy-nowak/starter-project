@@ -5,10 +5,10 @@ use PDOException;
 
 abstract class DatabaseConnection {
     protected $bdd;
-    public $host;
-    public $dbname;
-    public $dbUser;
-    public $dbPass;
+    private $host;
+    private $dbname;
+    private $dbUser;
+    private $dbPass;
 
     public function __construct() {
         $this->host = 'localhost';

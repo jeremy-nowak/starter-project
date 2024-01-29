@@ -28,33 +28,80 @@ abstract class AbstractDatabase extends DatabaseConnection implements DatabaseIn
         // }
     }
 
+    // public function createNewDbAbstract($db) {
+    //     try {
+    //         $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //         $sql = "CREATE DATABASE IF NOT EXISTS $db";
+    //         $prepare = $this->bdd->prepare($sql);
+    //         $prepare->bdd->execute();
+
+    //         parent::setDbNameConnection($db);
+
+    //         $tableCreate = "CREATE TABLE users (
+    //             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //             email VARCHAR(50),
+    //             password text,
+    //             reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    //             )";
+            
+    //         $stmt = $this->bdd->prepare($tableCreate);
+    //         $stmt->bdd->execute();
+            
+    //         echo json_encode(['success' => true, 'message' => "Database created successfully with the name: $db"]);
+
+    //     } catch (PDOException $e) {
+
+    //         echo json_encode(['success' => false, 'message' => "Error creating database: " . $e->getMessage()]);
+    //     }
+    // }
+
+
     public function createNewDbAbstract($db) {
         try {
             $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "CREATE DATABASE IF NOT EXISTS $db";
-            $this->bdd->exec($sql);
+    
+            // Utilisation de requête préparée pour la création de la base de données
+            $sqlCreateDb = "CREATE DATABASE IF NOT EXISTS $db";
+            $prepareCreateDb = $this->bdd->prepare($sqlCreateDb);
+            $prepareCreateDb->execute();
+    
+            // Mise à jour de la connexion de la classe parente avec le nouveau nom de la base de données
+            parent::setDbNameConnection($db);
+    
+            // Utilisation de requête préparée pour la création de la table
+            $tableCreate = "CREATE TABLE users (
+                id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                email VARCHAR(50),
+                password text,
+                reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )";
+            
+            $stmtCreateTable = $this->bdd->prepare($tableCreate);
+            $stmtCreateTable->execute();
             
             echo json_encode(['success' => true, 'message' => "Database created successfully with the name: $db"]);
-
+    
         } catch (PDOException $e) {
-
-            echo json_encode(['success' => false, 'message' => "Error creating database: " . $e->getMessage()]);
+            // Log d'erreur dans un fichier ou autre mécanisme de journalisation
+            error_log("Error creating database: " . $e->getMessage());
+            echo json_encode(['success' => false, 'message' => "An error occurred while creating the database: " . $e->getMessage()]);
         }
     }
+    
 
 
     public function createNewTable($db, $table) {
         try {
             $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-            $sql = "CREATE TABLE IF NOT EXISTS $db.$table (
+            $sql = "CREATE TABLE IF NOT EXISTS $db.$table ( 
                 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                 firstname VARCHAR(30) NOT NULL,
                 lastname VARCHAR(30) NOT NULL,
                 email VARCHAR(50),
                 reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                 )";
-            $this->bdd->exec($sql);
+            $this->bdd->execute($sql);
             
             echo json_encode(['success' => true, 'message' => "The table named '$table' have been created"]);
 
